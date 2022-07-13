@@ -1,3 +1,4 @@
+//? Menu Level1
 .menu-list {
     width: 223px;
     .menu-item {
@@ -15,4 +16,33 @@
 }
 .menu-popper {
     padding-bottom: 8px;
+}
+
+//? Menu Level2
+.header {
+    display: flex;
+    position: relative;
+    height: 50px;
+    cursor: pointer;
+    margin-top: -8px;
+}
+
+.back-btn {
+    margin-left: 28px;
+    width: 20px;
+    height: 100%;
+    font-size: 2rem;
+    line-height: 20px;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.header-title {
+    font-weight: 600;
+    font-size: 1.6rem;
+    line-height: 22px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }

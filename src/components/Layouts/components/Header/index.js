@@ -24,6 +24,21 @@ const MENU_ITEMS = [
     {
         icon: <FontAwesomeIcon icon={faLanguage} />,
         title: 'Language',
+        children: {
+            title: 'Language',
+            data: [
+                {
+                    type: 'language',
+                    code: 'en',
+                    title: 'English',
+                },
+                {
+                    type: 'language',
+                    code: 'vi',
+                    title: 'Tiếng Việt',
+                },
+            ],
+        },
     },
     {
         icon: <FontAwesomeIcon icon={faCircleQuestion} />,
@@ -35,6 +50,16 @@ const MENU_ITEMS = [
         title: 'Keyboard Shortcuts',
     },
 ];
+
+const handleMenuChange = (item) => {
+    switch (item.type) {
+        case 'language':
+            return;
+        default:
+            return;
+    }
+};
+
 function Header() {
     const [searchResult, setSearchResult] = useState([]);
 
@@ -84,7 +109,7 @@ function Header() {
                     <Button primary className={cx('custom-btn')}>
                         Log in
                     </Button>
-                    <Menu items={MENU_ITEMS}>
+                    <Menu items={MENU_ITEMS} onChange={handleMenuChange}>
                         <div className={cx('more-btn')}>
                             <FontAwesomeIcon icon={faEllipsisVertical} />
                         </div>
