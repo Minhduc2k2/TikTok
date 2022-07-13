@@ -21,7 +21,7 @@ function Button({
     onClick,
     ...passProps
 }) {
-    const Component = 'button';
+    let Component = 'button';
 
     const props = {
         onClick,
