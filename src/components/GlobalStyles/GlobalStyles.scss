@@ -10,7 +10,7 @@
     --primary: #fe2c55;
     --black: #000;
     --white: #fff;
-    --text-color: #333;
+    --text-color: rgba(22, 24, 35, 1);
     //? Default Layout
     --defaultLayout-header-height: 60px;
     --defaultLayout-width: 1150px;
@@ -35,4 +35,28 @@ input,
 
 a[href] {
     text-decoration: none;
+}
+
+//TODO: Overide Tippy
+.tippy-box {
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1.6rem;
+    line-height: 22px;
+    background-color: rgba(84, 84, 84, 0.92);
+    color: rgb(255, 255, 255);
+}
+.tippy-arrow::before {
+    color: rgba(84, 84, 84, 0.92);
+}
+
+.user-avatar {
+    margin-left: 16px;
+    position: relative;
+    width: 32px;
+    height: 32px;
+    background: center no-repeat;
+    background-size: cover;
+    border-radius: 50%;
+    cursor: pointer;
 }
