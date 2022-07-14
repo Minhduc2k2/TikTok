@@ -27,6 +27,8 @@ import Button from '~/components/Button';
 import Menu from '~/components/Popper/Menu';
 import { faCircleQuestion } from '@fortawesome/free-regular-svg-icons';
 import { faTiktok } from '@fortawesome/free-brands-svg-icons';
+import { UploadIcon } from '~/components/Icons';
+import Image from '~/components/Image';
 const cx = classNames.bind(styles);
 
 const currentUser = true;
@@ -143,7 +145,8 @@ function Header() {
                         <>
                             <Tippy delay={[0, 250]} content={'Upload'} placement="bottom">
                                 <button className={cx('action-btn')}>
-                                    <FontAwesomeIcon icon={faUpload} />
+                                    {/* <FontAwesomeIcon icon={faUpload} /> */}
+                                    <UploadIcon />
                                 </button>
                             </Tippy>
                             <button className={cx('action-btn')}>
@@ -162,10 +165,11 @@ function Header() {
                     )}
                     <Menu items={currentUser ? userMENU_ITEMS : MENU_ITEMS} onChange={handleMenuChange}>
                         {currentUser ? (
-                            <img
+                            <Image
                                 className={cx('user-avatar')}
                                 alt="Nguyen Minh Duc"
                                 src="https://p16-sign-sg.tiktokcdn.com/aweme/100x100/tiktok-obj/1603217248335873.jpeg?x-expires=1657890000&x-signature=xDsDNJOYCpPljF4NdP0Uecn1CdM%3D"
+                                fallback="https://p16-sign-va.tiktokcdn.com/tos-useast2a-avt-0068-giso/8c271260d60aec78fd8c745e804aa9a7~c5_100x100.jpeg?x-expires=1657987200&x-signature=9itVygxYnAIzpS0ABFFdrLJajPY%3D"
                             />
                         ) : (
                             <div className={cx('more-btn')}>

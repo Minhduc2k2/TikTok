@@ -1,5 +1,5 @@
 @import 'normalize.css';
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
 
 * {
     box-sizing: border-box;
@@ -20,7 +20,9 @@ html {
     font-size: 62.5%;
 }
 body {
-    font-family: 'IBM Plex Sans', sans-serif;
+    // font-family: 'IBM Plex Sans', sans-serif;
+    font-family: 'ProximaNova', sans-serif;
+
     font-size: 1.6rem;
     line-height: 1.5;
     text-rendering: optimizeSpeed;
@@ -36,7 +38,27 @@ input,
 a[href] {
     text-decoration: none;
 }
-
+//TODO: Font embedded
+@font-face {
+    font-family: ProximaNova;
+    src: url('/assets/font/Proxima-Nova-Bold.woff');
+    font-weight: 700;
+}
+@font-face {
+    font-family: ProximaNova;
+    src: url('/assets/font/ProximaNova-Semibold.woff2');
+    font-weight: 600;
+}
+@font-face {
+    font-family: ProximaNova;
+    src: url('/assets/font/Proxima-Nova-Regular.woff2');
+    font-weight: 500;
+}
+@font-face {
+    font-family: SofiaPro;
+    src: url('/assets/font/sofiapro-bold.woff2');
+    font-weight: 700;
+}
 //TODO: Overide Tippy
 .tippy-box {
     border-radius: 8px;
