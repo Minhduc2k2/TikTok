@@ -17,6 +17,7 @@
         font-size: 1.6rem;
         background-color: transparent;
         caret-color: var(--primary);
+        font-family: ProximaNova;
         //TODO: Check nếu placeholder không còn trống => Đã nhập chữ => Đổi màu icon search
         &:not(:placeholder-shown) ~ .search-btn {
             color: rgba(22, 24, 35, 0.75);
