@@ -23,7 +23,11 @@
 .menu-popper {
     padding-bottom: 8px;
 }
-
+.menu-body {
+    max-height: 500px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
 //? Menu Level2
 .header {
     display: flex;

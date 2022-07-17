@@ -11,8 +11,8 @@ import { Wrapper as PopperWrapper } from '~/components/Popper';
 import styles from './Search.module.scss';
 import { useDebounce } from '~/hooks';
 // import request from '~/utils/request';
-import * as request from '~/utils/request';
-import * as searchSevices from '~/apiServices/searchSevices';
+// import * as request from '~/utils/request';
+import * as searchSevice from '~/services/searchSevice';
 
 const cx = classNames.bind(styles);
 
@@ -27,7 +27,7 @@ function Search() {
     const debounced = useDebounce(searchValue, 500);
 
     useEffect(() => {
-        if (debounced.trim() == '') {
+        if (debounced.trim() === '') {
             setSearchResult([]);
             return;
         }
@@ -80,7 +80,7 @@ function Search() {
         // fetchAPI();
 
         const fetchAPI = async () => {
-            const result = await searchSevices.search(debounced);
+            const result = await searchSevice.search(debounced);
             setSearchResult(result);
             setLoading(false);
         };
@@ -100,47 +100,50 @@ function Search() {
         setShowResult(true);
     };
     const handleChange = (e) => {
-        if (e.target.value.trim() == ' ') {
+        if (e.target.value.trim() === ' ') {
             e.target.value = '';
         }
         setSearchValue(e.target.value);
     };
     return (
-        <HeadlessTippy
-            interactive={true}
-            visible={showResult && searchResult.length > 0}
-            render={(attrs) => (
-                <div className={cx('search-result')} tabIndex={-1} {...attrs}>
-                    <PopperWrapper>
-                        <h4 className={cx('search-title')}>Accounts</h4>
-                        {searchResult.map((data) => (
-                            <AccountItem key={data.id} data={data} />
+        //TODO: Using a wrapper <div> tag around the reference element solves this by creating a new parentNode context.
+        <div>
+            <HeadlessTippy
+                interactive={true}
+                visible={showResult && searchResult.length > 0}
+                render={(attrs) => (
+                    <div className={cx('search-result')} tabIndex={-1} {...attrs}>
+                        <PopperWrapper>
+                            <h4 className={cx('search-title')}>Accounts</h4>
+                            {searchResult.map((data) => (
+                                <AccountItem key={data.id} data={data} />
+                            ))}
+                        </PopperWrapper>
+                    </div>
+                )}
+                onClickOutside={handleHideResult}
+            >
+                <div className={cx('search')}>
+                    <input
+                        ref={inputRef}
+                        value={searchValue}
+                        placeholder="Search accounts and videos"
+                        spellCheck={false}
+                        onChange={handleChange}
+                        onFocus={handleShowResult}
+                    />
+                    {(loading && <FontAwesomeIcon icon={faSpinner} className={cx('loading')} />) ||
+                        (!!searchValue && (
+                            <button className={cx('clear')} onClick={handleClear}>
+                                <FontAwesomeIcon icon={faCircleXmark} />
+                            </button>
                         ))}
-                    </PopperWrapper>
+                    <button className={cx('search-btn')} onMouseDown={(e) => e.preventDefault()}>
+                        <SearchIcon />
+                    </button>
                 </div>
-            )}
-            onClickOutside={handleHideResult}
-        >
-            <div className={cx('search')}>
-                <input
-                    ref={inputRef}
-                    value={searchValue}
-                    placeholder="Search accounts and videos"
-                    spellCheck={false}
-                    onChange={handleChange}
-                    onFocus={handleShowResult}
-                />
-                {(loading && <FontAwesomeIcon icon={faSpinner} className={cx('loading')} />) ||
-                    (!!searchValue && (
-                        <button className={cx('clear')} onClick={handleClear}>
-                            <FontAwesomeIcon icon={faCircleXmark} />
-                        </button>
-                    ))}
-                <button className={cx('search-btn')} onMouseDown={(e) => e.preventDefault()}>
-                    <SearchIcon />
-                </button>
-            </div>
-        </HeadlessTippy>
+            </HeadlessTippy>
+        </div>
     );
 }
 
