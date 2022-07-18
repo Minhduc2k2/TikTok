@@ -23,9 +23,12 @@ function Menu({ children, items = [], hideOnClick = false, onChange = defaultFun
                     key={key}
                     data={item}
                     onClick={() => {
+                        //TODO: Nếu có menu con, thì khi bấm vào sẽ render menu con
                         if (isParent) {
                             setHistory((pre) => [...pre, item.children]);
-                        } else {
+                        }
+                        //TODO: Nếu không có menu con, thì khi bấm vào sẽ làm gì đó
+                        else {
                             onChange(item);
                         }
                     }}
@@ -34,27 +37,28 @@ function Menu({ children, items = [], hideOnClick = false, onChange = defaultFun
         });
     };
 
+    //TODO: Khi ẩn menu đi thì menu tự động quay về level 1;
+    const handleResetMenu = () => {
+        setHistory((pre) => pre.slice(0, 1));
+    };
+
+    //TODO: Khi nhấn vào nút back sẽ trở về menu level trước
+    const handleReturnToPreMenu = () => {
+        setHistory((pre) => pre.slice(0, pre.length - 1));
+    };
+
     return (
         <Tippy
             interactive={true}
             offset={[12, 8]}
-            onHide={() => {
-                setHistory((pre) => pre.slice(0, 1));
-            }}
+            onHide={handleResetMenu}
             hideOnClick={hideOnClick}
             delay={[0, 500]}
             placement="bottom-end"
             render={(attrs) => (
                 <div className={cx('menu-list')} tabIndex={-1} {...attrs}>
                     <PopperWrapper className={cx('menu-popper')}>
-                        {history.length > 1 && (
-                            <Header
-                                title={current.title}
-                                onBack={() => {
-                                    setHistory((pre) => pre.slice(0, pre.length - 1));
-                                }}
-                            />
-                        )}
+                        {history.length > 1 && <Header title={current.title} onBack={handleReturnToPreMenu} />}
                         <div className={cx('menu-body')}>{renderItems()}</div>
                     </PopperWrapper>
                 </div>

@@ -24,17 +24,17 @@ function Search() {
 
     const inputRef = useRef();
 
-    const debounced = useDebounce(searchValue, 500);
+    const debouncedValue = useDebounce(searchValue, 500);
 
     useEffect(() => {
-        if (debounced.trim() === '') {
+        if (debouncedValue.trim() === '') {
             setSearchResult([]);
             return;
         }
         setLoading(true);
 
         //TODO: use Fetch to get Data
-        // fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debounced)}&type=less`)
+        // fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debouncedValue)}&type=less`)
         //     .then((response) => response.json())
         //     .then((result) => setSearchResult(result.data))
         //     .finally(() => setLoading(false));
@@ -43,7 +43,7 @@ function Search() {
         // axios
         //     .get(`https://tiktok.fullstack.edu.vn/api/users/search`, {
         //         params: {
-        //             q: debounced,
+        //             q: debouncedValue,
         //             type: 'less',
         //         },
         //     })
@@ -54,7 +54,7 @@ function Search() {
         // request
         //     .get('users/search', {
         //         params: {
-        //             q: debounced,
+        //             q: debouncedValue,
         //             type: 'less',
         //         },
         //     })
@@ -63,14 +63,14 @@ function Search() {
 
         //TODO: use axios.create and custom get method to get data
         // request
-        //     .get('users/search', { params: { q: debounced, type: 'less' } })
+        //     .get('users/search', { params: { q: debouncedValue, type: 'less' } })
         //     .then((response) => setSearchResult(response.data))
         //     .finally(() => setLoading(false));
 
         //TODO: use Async/Await , axios.create and custom get method to get data
         // const fetchAPI = async () => {
         //     try {
-        //         const res = await request.get('users/search', { params: { q: debounced, type: 'less' } });
+        //         const res = await request.get('users/search', { params: { q: debouncedValue, type: 'less' } });
         //         setSearchResult(res.data);
         //         setLoading(false);
         //     } catch {
@@ -80,12 +80,12 @@ function Search() {
         // fetchAPI();
 
         const fetchAPI = async () => {
-            const result = await searchSevice.search(debounced);
+            const result = await searchSevice.search(debouncedValue);
             setSearchResult(result);
             setLoading(false);
         };
         fetchAPI();
-    }, [debounced]);
+    }, [debouncedValue]);
 
     const handleClear = () => {
         setSearchValue('');
